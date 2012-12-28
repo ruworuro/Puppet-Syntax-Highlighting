@@ -1,0 +1,98 @@
+# vim: nofoldenable foldmethod=manual
+snippet file
+	file {
+	  '${1:filename}':
+	    ensure   => ${3:present},
+	    checksum => 'md5',
+	    content  => template('${2:source}'),
+	    path     => '${4:path}',
+	    mode     => '${5:0644}',
+	    owner    => '${6:root}',
+	    group    => '${7:root}';
+	}
+	${8:}
+snippet fil
+
+	'${1:filename}':
+	  ensure   => ${3:present},
+	  checksum => 'md5',
+	  content  => template('${2:source}'),
+	  path     => '${4:path}',
+	  mode     => '${5:0644}',
+	  owner    => '${6:root}',
+	  group    => '${7:root}';${8:}
+snippet directory
+	file {
+	  '${1:filename}':
+	    ensure => '${3:directory}',
+	    path   => '${2:path}',
+	    mode   => '${4:0755}',
+	    owner  => '${5:root}',
+	    group  => '${6:root}';
+	}
+	${7:}
+snippet director
+
+	'${1:filename}':
+	  ensure => ${3:directory},
+	  path   => '${2:path}',
+	  mode   => '${4:0755}',
+	  owner  => '${5:root}',
+	  group  => '${6:root}';${7:}
+snippet exec
+	exec {
+	  '${1:name}':
+	    path        => '${6:/sbin:/bin:/usr/sbin:/usr/bin}'
+	    command     => '${2:command}',
+	    refreshonly => '${3:true}',
+	    onlyif      => '${4:run_if_return_0}',
+	    unless      => '${5:run_if_return_no_0}';
+	}
+	${7:}
+snippet exe
+
+	'${1:name}':
+	  path        => '${6:/sbin:/bin:/usr/sbin:/usr/bin}'
+	  command     => '${2:command}',
+	  refreshonly => '${3:true}',
+	  onlyif      => '${4:run_if_true}',
+	  unless      => '${5:run_if_false}';${7:}
+snippet encap
+	encap {
+	  '${1:package_name}':
+	    ensure => '${2:package_version}';
+	}
+	${3:}
+snippet package
+	package {
+	  '${1:package_name}':
+	    ensure   => ${2:present},
+	    provider => 'apt';
+	}
+	${3:}
+snippet packag
+
+	'${1:package_name}':
+	  ensure   => ${2:present},
+	  provider => 'apt';${3:}
+snippet tidy
+	tidy {
+	  '${1:directory}':
+	    age     => '${2:0}',
+	    matches => [ '${3:pattern}' ],
+	    recurse => '${4:true}',
+	    rmdirs  => '${5:true}';
+	}
+	${6:}
+snippet cron
+	cron {
+	  '${1:name}':
+	    command => '${2:command}',
+	    hour    => '${3:hour}',
+	    minute  => '${4:minute}',
+	    day     => '${5:day}';
+	}
+	${6:}
+snippet inc
+	include '${1}'
+	${2:}
